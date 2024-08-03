@@ -14,7 +14,7 @@ const MainHome = () => {
             <Contact_Search />
         </div>
         <div className={styles.contacts_list_container}>
-
+          contact
         </div>
       </div>
       <div className={styles.messages_container}>Columna de mensajes</div>
