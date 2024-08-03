@@ -7,10 +7,13 @@ const MainHome = () => {
   return (
     <div className={styles.home_container}>
       <div className={styles.contacts_container}>
-        <div>
+        <div className={styles.search_container}>
+            <div className={styles.title_container}>
+              <h1 className={styles.title}>MTEC</h1>
+            </div>
             <Contact_Search />
         </div>
-        <div>
+        <div className={styles.contacts_list_container}>
 
         </div>
       </div>

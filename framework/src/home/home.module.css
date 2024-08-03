@@ -7,11 +7,35 @@
     grid-row: 1fr;
 }
 
+.title_container {
+    height: 10vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title {
+    color: black;
+    font-size: 30px;
+}
+
 .contacts_container {
     height: 100%;
     width: 100%;
+}
 
-    background-color: red;
+.search_container {
+    height: 30vh;
+    width: 100%;
+    background-color: #F4FFFF;
+}
+
+.contacts_list_container {
+    height: 70vh;
+    width: 100%;
+    background-color: #ECE6F0;
 }
 
 .messages_container {

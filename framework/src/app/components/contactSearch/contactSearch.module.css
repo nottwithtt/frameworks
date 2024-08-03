@@ -1,6 +1,6 @@
 .container_search {
-    height: 100%;
     width: 100%;
+    height: 50%;
 
     display: flex;
     flex-direction: row;
@@ -20,6 +20,7 @@
     color: rgb(14, 14, 16);
     background: #dee1e2;
     display: block;
+    width: 80%;
     height: 36px;
 }
 
