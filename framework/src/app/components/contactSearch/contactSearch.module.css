@@ -1,0 +1,54 @@
+.container_search {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.input_contact {
+    font-size: 14px;
+    /* border-radius: 6px; */
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    line-height: 1.5;
+    padding: 5px 10px;
+    transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+    border: 2px solid #dee1e2;
+    color: rgb(14, 14, 16);
+    background: #dee1e2;
+    display: block;
+    height: 36px;
+}
+
+.input_contact:hover {
+    border-color: #ccc;
+}
+.input_contact:focus{
+    border-color: #9147ff;
+    background: #fff;
+}
+
+.botton_input_contact {
+    font-size: 14px;
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    line-height: 1.5;
+    padding: 5px 10px;
+    transition: box-shadow 100ms ease-in, border 100ms ease-in, background-color 100ms ease-in;
+    border: 2px solid #dee1e2;
+    color: rgb(14, 14, 16);
+    background: #dee1e2;
+    display: block;
+    height: 36px;
+}
+
+.botton_input_contact:hover {
+    border-color: #ccc;
+}
+.botton_input_contact:focus{
+    border-color: #9147ff;
+    background: #fff;
+}

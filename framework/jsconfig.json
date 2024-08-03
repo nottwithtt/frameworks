@@ -3,5 +3,13 @@
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "emojisense.languages": {
+    "markdown": true,
+    "plaintext": {
+        "markupCompletionsEnabled": false,
+        "emojiDecoratorsEnabled": false
+    },
+    "scminput": true // language used in the source control commit message box
+}
 }

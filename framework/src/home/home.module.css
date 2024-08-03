@@ -1,0 +1,31 @@
+.home_container {
+    height: 100vh;
+    width: 100vw;
+
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    grid-row: 1fr;
+}
+
+.contacts_container {
+    height: 100%;
+    width: 100%;
+
+    background-color: red;
+}
+
+.messages_container {
+    height: 100%;
+    width: 100%;
+    background-color: blue;
+}
+
+.contacts {
+    height: 100%;
+    width: 100%;
+}
+
+.messages {
+    height: 100%;
+    width: 100%;
+}

@@ -4,8 +4,8 @@ import MainHome from "@/home/page";
 
 export default function Home() {
   return (
-    <main className={styles.main}>
+    <div className={styles.main_container}>
       <MainHome />
-    </main>
+    </div>
   );
 }
