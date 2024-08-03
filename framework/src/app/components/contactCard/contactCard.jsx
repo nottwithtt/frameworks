@@ -1,9 +1,10 @@
 import { FaUserCircle } from "react-icons/fa";
+import styles from "./contactCard.module.css"
 
 const Contact_Card = () => {
   return (
-    <div>
-      <div>{FaUserCircle}</div>
+    <div className={styles.card_contact_container}>
+      <div ><span><FaUserCircle /></span></div>
       <div>
         <span>Nombre</span>
         <span>Here some text</span>

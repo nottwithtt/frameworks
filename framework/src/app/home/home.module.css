@@ -36,6 +36,7 @@
     height: 70vh;
     width: 100%;
     background-color: #ECE6F0;
+    overflow: auto;
 }
 
 .messages_container {

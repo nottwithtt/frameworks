@@ -1,5 +1,6 @@
 'use client'
 import Contact_Search from "@/app/components/contactSearch/contactSearch"
+import Contact_Card from "../components/contactCard/contactCard"
 import styles from "./home.module.css"
 
 
@@ -14,7 +15,16 @@ const MainHome = () => {
             <Contact_Search />
         </div>
         <div className={styles.contacts_list_container}>
-          contact
+          <Contact_Card />
+          <Contact_Card />
+          <Contact_Card />
+          <Contact_Card />
+          <Contact_Card />
+          <Contact_Card />
+          <Contact_Card />
+          <Contact_Card />
+          <Contact_Card />
+          <Contact_Card />
         </div>
       </div>
       <div className={styles.messages_container}>Columna de mensajes</div>
