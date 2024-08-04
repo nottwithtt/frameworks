@@ -1,4 +1,4 @@
-.speech_bubble {
+.speech_bubble_left {
 	position: relative;
 	background: #00aabb;
 	border-radius: .4em;
@@ -9,7 +9,7 @@
     margin-top: 10vh;
 }
 
-.speech_bubble:after {
+.speech_bubble_left:after {
 	content: '';
 	position: absolute;
 	left: 0;
@@ -22,4 +22,31 @@
 	border-top: 0;
 	margin-top: -10px;
 	margin-left: -20px;
+}
+
+.speech_bubble_right {
+	position: relative;
+	background: #00aabb;
+	border-radius: .4em;
+    width: 20vw;
+	height: 10vh;
+    padding: 1vw;
+    margin-right: 3vw;
+    margin-top: 10vh;
+	float: right; /* Coloca la burbuja a la derecha */
+}
+
+.speech_bubble_right:after {
+	content: '';
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 0;
+	height: 0;
+	border: 20px solid transparent;
+	border-left-color: #00aabb;
+	border-right: 0;
+	border-top: 0;
+	margin-top: -10px;
+	margin-right: -20px;
 }

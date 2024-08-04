@@ -1,9 +1,10 @@
 import styles from './topBar.module.css'
+import Contact_Card from '../contactCard/contactCard'
 
 const Top_Bar = () =>{
     return(
         <div className={styles.top_bar}>
-            <h1>RasPlin</h1>
+            <Contact_Card/>
         </div>
     )
 }
