@@ -11,3 +11,15 @@
 .container > *:nth-last-child(2) {
   margin-bottom: 30px; /* Adjust this value as needed */
 }
+
+.a{
+  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  background-color: #ece6f0;
+  color: #000;
+  width: 82px;
+  height: 36px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}

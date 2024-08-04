@@ -11,3 +11,15 @@
 .container > :nth-child(1) {
   margin-bottom: 70px; /* Extra gap for the second item */
 }
+
+.a{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ece6f0;
+  color: #000;
+  width: 150px;
+  height: 36px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}

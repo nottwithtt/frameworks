@@ -11,8 +11,8 @@ export default function Register() {
       <UserInfoComponent placeholder={"Usuario"}></UserInfoComponent>
       <PasswordComponent placeholder={"Contraseña"}></PasswordComponent>
       <div class="contenedorBotones">
-        <a href="/login">←</a>
-        <a href="/">✓</a>
+        <a href="/login" className={styles.a}>←</a>
+        <a href="/" className={styles.a}>✓</a>
       </div>
     </div>
   );
