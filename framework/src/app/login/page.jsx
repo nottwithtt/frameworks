@@ -7,7 +7,7 @@ export default function Login() {
     <div className={styles.container}>
       <UserInfoComponent placeholder={"Usuario"}></UserInfoComponent>
       <PasswordComponent placeholder={"Contraseña"}></PasswordComponent>
-      //Poner boton de crear cuenta
+      <a href="/register">Crear cuenta</a>
     </div>
   );
 }
