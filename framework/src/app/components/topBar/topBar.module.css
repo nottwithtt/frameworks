@@ -1,0 +1,14 @@
+.top_bar {
+    height: 10vh;
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ECE6F0;
+}
+
+.title {
+    color: black;
+    font-size: 30px;
+}
