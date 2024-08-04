@@ -4,11 +4,13 @@ import styles from "./page.module.css";
 
 export default function Register() {
   return (
+    //Poner Foto
     <div className={styles.container}>
       <UserInfoComponent placeholder={"Nombre"}></UserInfoComponent>
       <UserInfoComponent placeholder={"Apellido"}></UserInfoComponent>
       <UserInfoComponent placeholder={"Usuario"}></UserInfoComponent>
       <PasswordComponent placeholder={"Contraseña"}></PasswordComponent>
     </div>
+    //Poner botones
   );
 }
