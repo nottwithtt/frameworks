@@ -10,9 +10,13 @@ export default function Register() {
       <UserInfoComponent placeholder={"Apellido"}></UserInfoComponent>
       <UserInfoComponent placeholder={"Usuario"}></UserInfoComponent>
       <PasswordComponent placeholder={"Contraseña"}></PasswordComponent>
-      <div class="contenedorBotones" className={styles.contenedorBotones}>
-        <a href="/login" className={styles.a}>←</a>
-        <a href="/" className={styles.a}>✓</a>
+      <div className={styles.contenedorBotones}>
+        <a href="/login" className={styles.a}>
+          ←
+        </a>
+        <a href="/" className={styles.a}>
+          ✓
+        </a>
       </div>
     </div>
   );
