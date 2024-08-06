@@ -1,7 +1,10 @@
 'use client'
+import Top_Bar from "../components/topBar/topBar"
+import Message_Cloud from "@/app/components/messageCloud/messageCloud"
 import Contact_Search from "@/app/components/contactSearch/contactSearch"
 import Contact_Card from "../components/contactCard/contactCard"
 import styles from "./home.module.css"
+
 
 
 const MainHome = () => {
@@ -27,7 +30,7 @@ const MainHome = () => {
           <Contact_Card />
         </div>
       </div>
-      <div className={styles.messages_container}>Columna de mensajes</div>
+      <div className={styles.messages_container}><Top_Bar/><Message_Cloud/></div>
     </div>
   )
 }
