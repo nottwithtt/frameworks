@@ -79,4 +79,24 @@ const createSession = async (req, res) => {
   }
 };
 
-module.exports = { login, register, createSession };
+// Esto lo estoy probando, es para verificar que exite una session abierta y
+// salta el login
+const verifyToken = async (req, res) => {
+  const token = req.cookies.sessionToken;
+  if (!token) {
+    return res.status(401).json({ error: "No token provided" });
+  }
+
+  try {
+    const decoded = JWT.verify(token, process.env.ACCESS_TOKEN_SEQUENCE);
+    const user = await User.findById(decoded.id);
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    return res.status(200).json({ message: "Token is valid", user });
+  } catch (error) {
+    return res.status(401).json({ error: "Invalid token" });
+  }
+};
+
+module.exports = { login, register, createSession, verifyToken };
