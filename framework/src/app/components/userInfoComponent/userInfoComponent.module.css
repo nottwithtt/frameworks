@@ -1,0 +1,31 @@
+/* components/RoundedInput.module.css */
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ece6f0;
+  width: 360px;
+  height: 82px;
+  border-radius: 16px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow */
+}
+
+.icon {
+  color: #000000;
+  width: 40px;
+  height: 30px;
+}
+
+.input {
+  border: none;
+  background: none;
+  outline: none;
+  color: #65558f;
+  text-align: center; /* Ensure text is aligned left */
+  font-size: 16px; /* Adjust font size for better appearance */
+}
+
+.input::placeholder {
+  color: #65558f;
+  text-align: center; /* Ensure placeholder text is aligned left */
+}
