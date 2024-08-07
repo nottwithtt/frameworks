@@ -18,7 +18,7 @@ module.exports = function (serverPort) {
 
   io.on("connection", (socket) => {
     socket.on("addNewUser", (userId) => {
-      // const decoded = JWT.verify(token, process.env.ACCESS_TOKEN_SEQUENCE);
+      //const decoded = JWT.verify(token, process.env.ACCESS_TOKEN_SEQUENCE);
       // const user = await User.findById(decoded.id);
       !onlineUsers.some((user) => user.userId === userId) &&
         onlineUsers.push({
