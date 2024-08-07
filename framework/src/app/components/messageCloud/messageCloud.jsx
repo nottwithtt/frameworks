@@ -1,11 +1,9 @@
 import styles from './messageCloud.module.css'
 
-const Message_Cloud = () => {
-    let left = false;
-
+const Message_Cloud = ( {msg, isLeft} ) => {
     return(
-        <div className={left? styles.speech_bubble_left : styles.speech_bubble_right}>       
-            <p>El mondongo puriscaleño es el mejor.</p>
+        <div className={isLeft? styles.speech_bubble_left : styles.speech_bubble_right}>       
+            <p>{msg}</p>
         </div>
         
         )
