@@ -1,4 +1,4 @@
-const contactModel = requiere("../models/contactModel");
+const contactModel = require("../models/contactModel");
 
 
 //Se encarga de add contactos

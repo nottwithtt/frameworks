@@ -3,6 +3,7 @@ import Top_Bar from "../components/topBar/topBar"
 import Message_Cloud from "@/app/components/messageCloud/messageCloud"
 import Contact_Search from "@/app/components/contactSearch/contactSearch"
 import Contact_Card from "../components/contactCard/contactCard"
+import PopPap from '@/app/components/popPap/popPap'
 import styles from "./home.module.css"
 import { useEffect, useState, useRef } from "react"
 import { io } from "socket.io-client"
@@ -11,8 +12,10 @@ const MainHome = () => {
   const [socket, setSocket] = useState(null)
   const [messages, setMessages] = useState([])
   const [selectedChat, setSelectedChat] = useState(null)
+  const [contacts, setContactas] = useState([])
   const [message, setMessage] = useState("")
   const [userId, setUserId] = useState("")
+  const [pop, setPop] = useState(false)
 
   const messagesEndRef = useRef(null);
 
@@ -27,8 +30,7 @@ const MainHome = () => {
   }
 
   const handleAddClick = () => {
-    console.log("Add button clicked");
-    // Aquí puedes agregar la lógica que desees para el botón +
+    setPop(!pop)
   };
 
   const sendMessage = (msg) => {
@@ -71,6 +73,7 @@ const MainHome = () => {
       const response = await fetch("http://localhost:4000/contById", {userId: userId})
       const data = await response.json();
       console.log(data)
+      setContactas(data)
     }
 
     fetchUserId();
@@ -95,6 +98,14 @@ const MainHome = () => {
 
   return (
     <div className={styles.home_container}>
+        {pop && (
+          <PopPap 
+            userId={userId}
+            message={"Nuevo"}
+            onClose={handleAddClick}
+            setContacts={setContactas}
+            />
+        )}
       <button className={styles.addButton} onClick={handleAddClick}>+</button>
       <div className={styles.contacts_container}>
         <div className={styles.search_container}>
@@ -104,8 +115,8 @@ const MainHome = () => {
           <Contact_Search isSearch={true} handler={handleSearch} />
         </div>
         <div className={styles.contacts_list_container}>
-          {[...Array(10)].map((_, index) => (
-            <Contact_Card key={index} />
+          {contacts.map((info, index) => (
+            <Contact_Card key={index} nombre={info.username} descripcion={surname} />
           ))}
         </div>
       </div>
