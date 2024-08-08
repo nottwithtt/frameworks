@@ -1,10 +1,4 @@
 const { Server } = require("socket.io");
-const JWT = require("jsonwebtoken");
-const User = require("../models/User");
-const {
-  hashPassword,
-  comparePassword,
-} = require("../utils/authenticationUtils");
 
 module.exports = function (serverPort) {
   let onlineUsers = [];
@@ -26,31 +20,31 @@ module.exports = function (serverPort) {
           socketId: socket.id,
         });
       }
-      // console.log("Connected Users:", onlineUsers);
+      console.log("Connected Users:", onlineUsers);
     });
 
     socket.on("sendMessage", (message) => {
-      const user = onlineUsers.find(
-        (user) => user.userId === message.userId
-      );
-      // io.emit("getMessage", message)
+      console.log("Lista de usuarios: ", onlineUsers);
+      
+      const user = onlineUsers.find((user) => {
+        console.log("Comparando:", user.userId.trim(), "con", message.contactId.trim());
+        return user.userId.trim() === message.contactId.trim();
+      });
+    
+      console.log("Enviando a: ", user);
+    
       if (user) {
-        // console.log("sending message");
-        // io.to(user.socketId).emit("getMessage", message);
-        io.emit("getMessage", message)
+        console.log("Entro a enviar mensaje", user.socketId);
+        socket.to(user.socketId).emit("getMessage", message);
+        // io.emit("getMessage", message);
+      } else {
+        console.log("Usuario no encontrado para el ID:", message.contactId);
       }
     });
-  });
-}
-//  io.on("connection", (socket) => {
-    // console.log("a user connected");
-    
-  //   socket.on("message", (data) => {
-  //     console.log(data);
-  //     io.emit("message", data);
-  //   });
 
-  //   socket.on("disconnect", () => {
-  //     console.log("user disconnected");
-  //   });
-  // });
+    socket.on("disconnect", () => {
+      onlineUsers = onlineUsers.filter((user) => user.socketId !== socket.id);
+      console.log("Usuario desconectado, lista actualizada:", onlineUsers);
+    });
+  });
+};

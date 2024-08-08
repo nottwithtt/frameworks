@@ -34,8 +34,9 @@ const MainHome = () => {
   };
 
   const sendMessage = (msg) => {
+    console.log("sending message to:", selectedChat);
     if (socket) {
-      socket.emit("sendMessage", { userId: userId, text: msg });
+      socket.emit("sendMessage", { userId: userId, contactId: selectedChat, text: msg });
       setMessage("");
     } else {
       console.error("Socket not initialized");
@@ -83,6 +84,8 @@ const MainHome = () => {
     
       const data = await response.json();
       console.log(data);
+      setSelectedChat(data[0]._id);
+      console.log('Primer contacto',selectedChat)
       setContactas(data);
     };
     fetchUserId();
@@ -124,7 +127,13 @@ const MainHome = () => {
         </div>
         <div className={styles.contacts_list_container}>
           {contacts.map((info, index) => (
-            <Contact_Card key={index} nombre={info.name} descripcion={info.surname} />
+            <Contact_Card key={index} 
+            nombre={info.name}
+            descripcion={info.surname}
+            idContact={info._id}
+            selectedChat={selectedChat}
+            setSelectedChat={setSelectedChat}
+            />
           ))}
         </div>
       </div>

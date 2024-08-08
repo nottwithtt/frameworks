@@ -4,7 +4,10 @@ import Contact_Card from '../contactCard/contactCard'
 const Top_Bar = () =>{
     return(
         <div className={styles.top_bar}>
-            <Contact_Card/>
+            <Contact_Card
+            idContact={"2"}
+            selectedChat={"1"}
+            />
         </div>
     )
 }
