@@ -4,7 +4,7 @@ import Message_Cloud from "@/app/components/messageCloud/messageCloud"
 import Contact_Search from "@/app/components/contactSearch/contactSearch"
 import Contact_Card from "../components/contactCard/contactCard"
 import styles from "./home.module.css"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import { io } from "socket.io-client"
 
 const MainHome = () => {
@@ -14,15 +14,22 @@ const MainHome = () => {
   const [message, setMessage] = useState("")
   const [userId, setUserId] = useState("")
 
-  const getCookie = (name) => {
-    const value = `; ${document.cookie}`;
-    const parts = value.split(`; ${name}=`);
-    if (parts.length === 2) return parts.pop().split(';').shift();
+  const messagesEndRef = useRef(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(scrollToBottom, [messages]);
 
   const handleSearch = (input) => {
     console.log(input)
   }
+
+  const handleAddClick = () => {
+    console.log("Add button clicked");
+    // Aquí puedes agregar la lógica que desees para el botón +
+  };
 
   const sendMessage = (msg) => {
     if (socket) {
@@ -59,7 +66,15 @@ const MainHome = () => {
         };
       }
     };
+
+    const getContacts = async () => {
+      const response = await fetch("http://localhost:4000/contById", {userId: userId})
+      const data = await response.json();
+      console.log(data)
+    }
+
     fetchUserId();
+    getContacts();
   }, []);
 
   useEffect(() => {
@@ -80,6 +95,7 @@ const MainHome = () => {
 
   return (
     <div className={styles.home_container}>
+      <button className={styles.addButton} onClick={handleAddClick}>+</button>
       <div className={styles.contacts_container}>
         <div className={styles.search_container}>
           <div className={styles.title_container}>
@@ -95,10 +111,16 @@ const MainHome = () => {
       </div>
       <div className={styles.messages_container}>
         <Top_Bar />
-        {messages.map((msg, index) => (
-          <Message_Cloud key={index} msg={msg.text} isLeft={!(msg.userId === userId)} />
-        ))}
-        <Contact_Search isSearch={false} handler={sendMessage} />
+        <div className={styles.messages}>
+          {messages.map((msg, index) => (
+            <Message_Cloud key={index} msg={msg.text} isLeft={!(msg.userId === userId)} />
+          ))}
+          <div ref={messagesEndRef} />
+        </div>
+        <div>
+          <Contact_Search isSearch={false} handler={sendMessage} />
+        </div>
+        
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 const express = require("express");
 const authRoutes = require("./routes/authenticationRouter");
+const users = require("./routes/userRouter")
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const chatSocket = require("./sockets/chatSoket");
@@ -19,4 +20,5 @@ app.use(corsapp);
 chatSocket(4001);
 
 app.use("/", authRoutes);
+app.use("/", users)
 module.exports = app;
