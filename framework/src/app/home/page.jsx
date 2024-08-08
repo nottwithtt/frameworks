@@ -12,6 +12,13 @@ const MainHome = () => {
   const [messages, setMessages] = useState([])
   const [selectedChat, setSelectedChat] = useState(null)
   const [message, setMessage] = useState("")
+  const [userId, setUserId] = useState("")
+
+  const getCookie = (name) => {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  };
 
   const handleSearch = (input) => {
     console.log(input)
@@ -19,7 +26,7 @@ const MainHome = () => {
 
   const sendMessage = (msg) => {
     if (socket) {
-      socket.emit("message", { userId: "123", text: msg });
+      socket.emit("sendMessage", { userId: userId, text: msg });
       setMessage("");
     } else {
       console.error("Socket not initialized");
@@ -27,48 +34,74 @@ const MainHome = () => {
   };
 
   useEffect(() => {
-    const socket = io("http://localhost:4001");
-    setSocket(socket);
-  
-    socket.on("message", (data) => {
-      setMessages((prevMessages) => [...prevMessages, data]);
-    });
-  
-    return () => {
-      socket.disconnect();
+    const fetchUserId = async () => {
+      const response = await fetch("http://localhost:4000/verify-token", {
+        method: "GET",
+        credentials: "include",
+      });
+
+      const data = await response.json();
+      if (data.message === "Token is valid") {
+        console.log("mi id:", data.userId);
+        
+        setUserId(data.userId);
+        const socket = io("http://localhost:4001");
+        setSocket(socket);
+        console.log("socket initialized")
+        socket.emit("addNewUser", data.userId);
+
+        socket.on("message", (data) => {
+          setMessages((prevMessages) => [...prevMessages, data]);
+        });
+
+        return () => {
+          socket.disconnect();
+        };
+      }
     };
+    fetchUserId();
   }, []);
+
+  useEffect(() => {
+    if (socket === null) return;
+    socket.on("getMessage", (res) => {
+      console.log("received a message from", res.userId);
+      if (Array.isArray(res)) {
+        setMessages((prev) => [...prev, ...res]);
+      } else {
+        setMessages((prev) => [...prev, res]);
+      }
+    });
+
+    return () => {
+      socket.off("getMessage");
+    };
+  }, [socket]);
 
   return (
     <div className={styles.home_container}>
       <div className={styles.contacts_container}>
         <div className={styles.search_container}>
-            <div className={styles.title_container}>
-              <h1 className={styles.title}>MTEC</h1>
-            </div>
-            <Contact_Search isSearch = {true} handler={handleSearch}/>
+          <div className={styles.title_container}>
+            <h1 className={styles.title}>MTEC</h1>
+          </div>
+          <Contact_Search isSearch={true} handler={handleSearch} />
         </div>
         <div className={styles.contacts_list_container}>
-          <Contact_Card />
-          <Contact_Card />
-          <Contact_Card />
-          <Contact_Card />
-          <Contact_Card />
-          <Contact_Card />
-          <Contact_Card />
-          <Contact_Card />
-          <Contact_Card />
-          <Contact_Card />
+          {[...Array(10)].map((_, index) => (
+            <Contact_Card key={index} />
+          ))}
         </div>
       </div>
-      <div className={styles.messages_container}><Top_Bar/>
-      {messages.map((msg, index) => (
-          <Message_Cloud key={index} msg={msg.text} isLeft={true} />
+      <div className={styles.messages_container}>
+        <Top_Bar />
+        {messages.map((msg, index) => (
+          <Message_Cloud key={index} msg={msg.text} isLeft={!(msg.userId === userId)} />
         ))}
-        <Contact_Search isSearch={false} handler={sendMessage}/>
+        <Contact_Search isSearch={false} handler={sendMessage} />
       </div>
     </div>
   )
 }
 
-export default MainHome
+export default MainHome;

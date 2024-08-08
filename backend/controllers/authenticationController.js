@@ -93,7 +93,7 @@ const verifyToken = async (req, res) => {
     if (!user) {
       return res.status(404).json({ error: "User not found" });
     }
-    return res.status(200).json({ message: "Token is valid", user });
+    return res.status(200).json({ message: "Token is valid", userId: user._id });
   } catch (error) {
     return res.status(401).json({ error: "Invalid token" });
   }

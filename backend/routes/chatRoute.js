@@ -7,7 +7,7 @@ const {
 
 const router = express.Router();
 
-router.post("/", createChat); //Ocupa emisor id y receptor id
+router.post("/crearChat", createChat); //Ocupa emisor id y receptor id
 router.get("/:userId", userChats); //ocupa user id
 router.get("/find/:firstId/:secondId", findChat); //Ocupa emisor id y receptor id
 

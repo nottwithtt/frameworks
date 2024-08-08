@@ -7,6 +7,8 @@ const {
 } = require("../utils/authenticationUtils");
 
 module.exports = function (serverPort) {
+  let onlineUsers = [];
+
   const io = new Server(serverPort, {
     cors: {
       origin: "*",
@@ -18,29 +20,28 @@ module.exports = function (serverPort) {
 
   io.on("connection", (socket) => {
     socket.on("addNewUser", (userId) => {
-      //const decoded = JWT.verify(token, process.env.ACCESS_TOKEN_SEQUENCE);
-      // const user = await User.findById(decoded.id);
-      !onlineUsers.some((user) => user.userId === userId) &&
+      if (!onlineUsers.some((user) => user.userId === userId)) {
         onlineUsers.push({
           userId,
           socketId: socket.id,
         });
-      
+      }
+      console.log("Connected Users:", onlineUsers);
+    });
+
     socket.on("sendMessage", (message) => {
       const user = onlineUsers.find(
-        (user) => user.userId === message.recipientId
+        (user) => user.userId === message.userId
       );
-      
+      // io.emit("getMessage", message)
       if (user) {
         console.log("sending message");
-        io.to(user.socketId).emit("getMessage", message);
+        // io.to(user.socketId).emit("getMessage", message);
+        io.emit("getMessage", message)
       }
     });
-  
-    console.log("Connected Users:", onlineUsers);
-    });
   });
-
+}
 //  io.on("connection", (socket) => {
     // console.log("a user connected");
     
@@ -53,5 +54,3 @@ module.exports = function (serverPort) {
   //     console.log("user disconnected");
   //   });
   // });
-
-};
