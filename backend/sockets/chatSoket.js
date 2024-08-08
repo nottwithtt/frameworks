@@ -35,8 +35,8 @@ module.exports = function (serverPort) {
     
       if (user) {
         console.log("Entro a enviar mensaje", user.socketId);
-        socket.to(user.socketId).emit("getMessage", message);
-        // io.emit("getMessage", message);
+        // socket.to(user.socketId).emit("getMessage", message);
+        io.emit("getMessage", message);
       } else {
         console.log("Usuario no encontrado para el ID:", message.contactId);
       }
