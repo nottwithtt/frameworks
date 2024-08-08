@@ -62,22 +62,30 @@ const MainHome = () => {
         socket.on("message", (data) => {
           setMessages((prevMessages) => [...prevMessages, data]);
         });
-
+        getContacts(data.userId);
         return () => {
           socket.disconnect();
         };
       }
     };
 
-    const getContacts = async () => {
-      const response = await fetch("http://localhost:4000/contById", {userId: userId})
+    const getContacts = async (userId1) => {
+      console.log('Comprobando id', userId1);
+    
+      const response = await fetch(`http://localhost:4000/contById`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        }, 
+        body: JSON.stringify({
+          userId: userId1
+      })});
+    
       const data = await response.json();
-      console.log(data)
-      setContactas(data)
-    }
-
+      console.log(data);
+      setContactas(data);
+    };
     fetchUserId();
-    getContacts();
   }, []);
 
   useEffect(() => {
@@ -116,7 +124,7 @@ const MainHome = () => {
         </div>
         <div className={styles.contacts_list_container}>
           {contacts.map((info, index) => (
-            <Contact_Card key={index} nombre={info.username} descripcion={surname} />
+            <Contact_Card key={index} nombre={info.name} descripcion={info.surname} />
           ))}
         </div>
       </div>

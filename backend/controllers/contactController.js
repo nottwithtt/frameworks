@@ -3,12 +3,19 @@ const contactModel = require("../models/contactModel");
 
 //Se encarga de add contactos
 const addContact = async (req, res) => {
+
   const { userId, user_contact_Id } = req.body;
   try {
-    const contact = await contactModel.findOne({
+    // Verificar si ya existe un contacto entre los dos usuarios
+    const existingContact = await contactModel.findOne({
       members: { $all: [userId, user_contact_Id] },
     });
-    if (contact) return res.status(200).json(contact);
+
+    if (existingContact) {
+      return res.status(200).json(existingContact);
+    }
+
+    // Si no existe, crear un nuevo contacto
     const newContact = new contactModel({
       members: [userId, user_contact_Id],
     });

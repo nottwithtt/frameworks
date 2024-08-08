@@ -6,7 +6,7 @@ const {
 
 const router = express.Router();
 
-router.get("/contById", getContactsByUser)
+router.post("/contById", getContactsByUser);
 router.get("/allUsers", getAllUsers); // no ocuopa nada
 
 module.exports = router;

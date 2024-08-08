@@ -26,7 +26,7 @@ module.exports = function (serverPort) {
           socketId: socket.id,
         });
       }
-      console.log("Connected Users:", onlineUsers);
+      // console.log("Connected Users:", onlineUsers);
     });
 
     socket.on("sendMessage", (message) => {
@@ -35,7 +35,7 @@ module.exports = function (serverPort) {
       );
       // io.emit("getMessage", message)
       if (user) {
-        console.log("sending message");
+        // console.log("sending message");
         // io.to(user.socketId).emit("getMessage", message);
         io.emit("getMessage", message)
       }

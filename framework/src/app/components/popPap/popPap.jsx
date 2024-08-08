@@ -7,6 +7,7 @@ const PopPap = ({ userId, message, onClose, setContacts }) => {
     const getContacts = async () => {
         const response = await fetch("http://localhost:4000/contById", {userId: userId})
         const data = await response.json();
+        console.log(data)
         setContacts(data)
       }
 
@@ -21,6 +22,7 @@ const PopPap = ({ userId, message, onClose, setContacts }) => {
                 user_contact_Id: input
             })
         }).then(() => {
+            console.log('Contacto creado')
             getContacts()
         })
         // Handle response
